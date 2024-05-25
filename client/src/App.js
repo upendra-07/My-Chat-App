@@ -1,18 +1,42 @@
-// src/App.js
-import React from 'react';
-import { useQuery } from '@apollo/client';
-import { GET_HELLO } from './graphql/queries/getHello';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import Login from "./Screens/Login/Login";
+import Home from "./Screens/Home/Home";
+import WelcomePage from "./Screens/WelcomePage/WelcomePage";
+// import Dashboard from "./Screens/Dashboard/Dashboard"; // Uncomment and import your Dashboard component
+// import NotFound from "./Screens/NotFound/NotFound"; // Uncomment and import your NotFound component
 
 const App = () => {
-  const { loading, error, data } = useQuery(GET_HELLO);
+  // A mock function to simulate authentication status check
+  const isAuthenticated = () => {
+    // Replace with your actual logic for checking if a user is authenticated
+    return !!localStorage.getItem("authToken");
+  };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  // PrivateRoute component to protect private routes
+  const PrivateRoute = ({ element: Element, ...rest }) => (
+    <Route
+      {...rest}
+      element={isAuthenticated() ? <Element /> : <Navigate to="/login" />}
+    />
+  );
 
   return (
-    <div>
-      <h1>{data.hello}</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+        {/* <PrivateRoute path="/dashboard" element={<Dashboard />} /> */}
+        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="*" element={<Navigate to="/" />} /> {/* Default Route */}
+      </Routes>
+    </Router>
   );
 };
 

@@ -1,0 +1,20 @@
+@import url('../../Styles/Styles.css');
+
+.welcome-page-main{
+  background-color:var(--primary-color);
+  min-height: 100vh;
+}
+
+.logo{
+    color: white;
+    font-family:cursive;
+    font-weight: bold;
+    font-size: 35px;
+    margin:30px 10px 10px 35px !important;
+}
+
+.about{
+    color: rgb(101, 26, 26);
+    font-size: 20px;
+    margin: 45px 10px 10px 35px !important;
+}
