@@ -9,23 +9,37 @@
     font-family:cursive;
     font-weight: bold;
     font-size: 35px;
-    margin:30px 0px 10px 60px !important;
+    margin:30px 0px 10px 50px !important;
+    color: var(--text-color);
 }
 
 .items{
     color: rgb(0, 0, 0);
     font-size: 16px;
-    margin: 55px 10px 10px 25px !important;
-  cursor: pointer;
-
+    margin: 55px 0px 10px 0px !important;
+    cursor: pointer;
+    font-weight: 500;
 }
 
 .login{
-  margin:55px 0px 10px 180px !important;
+  margin:55px 0px 10px 0px !important;
   cursor: pointer;
-
 }
 
+
+
 .get-start{
-    margin:45px 0px 10px 20px !important;
+    margin:45px 0px 10px 0px !important;
+}
+
+
+.app-text{
+  font-size: 40px;
+  font-weight: 740;
+}
+
+.texting-img{
+  border-radius: 10%;
+  margin: 10% 0 0 0 ;
+  width: 100%;
 }
