@@ -44,12 +44,16 @@ const WelcomePage = () => {
               Let's Connect <br /> with Your Friends <br /> in Real Time
               <br />
             </Typography>
-            <Typography variant="p">
+            <Typography variant="h5" className="app-info">
               Great software that allows you to chat from any place <br /> at
               any time without any interruption
             </Typography>
           </Grid>
+          <Grid item xs={12} pl={25}>
+            <GetStartedButton label={"Start Chatting Now"} />
+          </Grid>
         </Grid>
+
         <Grid container xs={4} sm={4} md={4}>
           <Box position="relative">
             <img
@@ -60,7 +64,7 @@ const WelcomePage = () => {
             />
             <Box
               position="absolute"
-              top="60%"
+              top="55%"
               left="50%"
               transform="translate(-50%, -50%)"
               bgcolor="white"
@@ -68,9 +72,12 @@ const WelcomePage = () => {
               padding="5px 10px"
               borderRadius="5px"
             >
+              <Typography variant="p" style={{ fontWeight: "bold" }}>
+                Received a message
+              </Typography>
               <Typography variant="body1">
                 {" "}
-                Hiii! 😊
+                Hiii.....! 😊
                 <br />
                 How are you?
               </Typography>

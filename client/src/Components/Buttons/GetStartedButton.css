@@ -13,3 +13,7 @@
   margin: 4px 2px;
   cursor: pointer;
 }
+
+.get-started-btn:hover {
+background-color:#f7730fee;
+}

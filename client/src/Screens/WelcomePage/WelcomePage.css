@@ -40,6 +40,11 @@
 
 .texting-img{
   border-radius: 10%;
-  margin: 10% 0 0 0 ;
+  margin: 15% 0 0 4% ;
   width: 100%;
+}
+
+.app-info{
+  color: gray;
+  margin-top: 20px !important;
 }
