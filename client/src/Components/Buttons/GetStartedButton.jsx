@@ -1,7 +1,11 @@
 import React from "react";
 import "./GetStartedButton.css";
-const GetStartedButton = ({ label }) => {
-  return <button className="get-started-btn">{label}</button>;
+const GetStartedButton = ({ label, onClick }) => {
+  return (
+    <button className="get-started-btn" onClick={onClick}>
+      {label}
+    </button>
+  );
 };
 
 export default GetStartedButton;

@@ -4,7 +4,14 @@ import "./WelcomePage.css";
 import GetStartedButton from "../../Components/Buttons/GetStartedButton";
 import ChattingWomenImg from "../../Assets/texting_women.jpg";
 import { Typography, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { ROUTES_CONST } from "../../Routes/RouteConstant";
+
 const WelcomePage = () => {
+  const navigate = useNavigate();
+  const onGetStarted = () => {
+    navigate(`${ROUTES_CONST.LOGIN}`);
+  };
   return (
     <Grid className="welcome-page-main">
       <Grid className="app-bar" container md={12} xs={12} sm={12}>
@@ -50,7 +57,10 @@ const WelcomePage = () => {
             </Typography>
           </Grid>
           <Grid item xs={12} pl={25}>
-            <GetStartedButton label={"Start Chatting Now"} />
+            <GetStartedButton
+              label={"Start Chatting Now"}
+              onClick={onGetStarted}
+            />
           </Grid>
         </Grid>
 
