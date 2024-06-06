@@ -41,7 +41,7 @@ const WelcomePage = () => {
           align="right"
           alignItems={"center"}
         >
-          <GetStartedButton label={"Get Started"} />
+          <GetStartedButton label={"Get Started"} onClick={onGetStarted} />
         </Grid>
       </Grid>
       <Grid container xs={12} sm={12} md={12}>
