@@ -1,26 +1,26 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { pool, TABLE_NAMES } = require("../db"); // Import the PostgreSQL pool from db.js
 require("dotenv").config();
 
 const resolvers = {
   Mutation: {
-    createUser: async ({ name, email, password }) => {
+    createUser: async (_, { input }) => {
+      console.log(input);
+      const { name, email, password } = input;
       const hashedPassword = await bcrypt.hash(password, 10);
-
-      // Connect to PostgreSQL database (using your chosen library)
-      // Execute SQL query to insert new user
-      const query = `INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *`;
+      const query = `INSERT INTO "${TABLE_NAMES.USERS}" (name, email, password) VALUES ($1, $2, $3) RETURNING *`;
       const values = [name, email, hashedPassword];
 
       try {
-        const result = await client.query(query, values); // Replace 'client' with your connection object
-        const newUser = result.rows[0]; // Assuming the query returns the newly created user
+        const client = await pool.connect(); // Get a client from the pool
+        const result = await client.query(query, values);
+        const newUser = result.rows[0];
+        client.release(); // Release the client back to the pool
         return newUser;
       } catch (error) {
         console.error("Error creating user:", error);
-        throw new Error("Failed to create user"); // Handle errors appropriately
-      } finally {
-        // Close connection if necessary (depending on your library)
+        throw new Error("Failed to create user");
       }
     },
   },
