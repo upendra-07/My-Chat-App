@@ -19,4 +19,9 @@ const connectDB = async () => {
   }
 };
 
-module.exports = { pool, connectDB };
+// Define table names
+const TABLE_NAMES = {
+  USERS: "user", // Replace with your actual users table name
+};
+
+module.exports = { pool, connectDB, TABLE_NAMES };

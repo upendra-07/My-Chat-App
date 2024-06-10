@@ -1,17 +1,14 @@
-// src/typeDefs/index.js
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
     id: ID!
     name: String!
     email: String!
-    password: String!
   }
 
   type Query {
-    hello: String
-    users: [User]
+    users: [User!]!
   }
 
   type Mutation {
