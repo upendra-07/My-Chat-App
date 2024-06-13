@@ -2,16 +2,16 @@ const { gql } = require("apollo-server-express");
 
 const type = gql`
   type User {
-    id: Int
-    name: String!
-    email: String!
+    userName: String
+    email: String
+    phone: Int
     password: String!
   }
 
   input userSignInInput {
-    id: Int
-    name: String!
-    email: String!
+    userName: String
+    email: String
+    phone: Int
     password: String!
   }
 

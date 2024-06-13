@@ -5,8 +5,7 @@ require("dotenv").config();
 
 const resolvers = {
   Mutation: {
-    createUser: async (_, { input }) => {
-      console.log(input);
+    userSignIn: async (_, { input }) => {
       const { name, email, password } = input;
       const hashedPassword = await bcrypt.hash(password, 10);
       const query = `INSERT INTO "${TABLE_NAMES.USERS}" (name, email, password) VALUES ($1, $2, $3) RETURNING *`;
@@ -17,7 +16,14 @@ const resolvers = {
         const result = await client.query(query, values);
         const newUser = result.rows[0];
         client.release(); // Release the client back to the pool
-        return newUser;
+
+        const token = jwt.sign(
+          { userId: newUser.id, email: newUser.email },
+          process.env.JWT_SECRET, // Use a strong secret key from environment variables
+          { expiresIn: "1h" } // Token expiration time
+        );
+        console.log(token, newUser, "token");
+        return { id: newUser.id, token };
       } catch (error) {
         console.error("Error creating user:", error);
         throw new Error("Failed to create user");
