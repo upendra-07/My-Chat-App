@@ -8,8 +8,6 @@ import {
 import Login from "./Screens/Login/Login";
 import Home from "./Screens/Home/Home";
 import WelcomePage from "./Screens/WelcomePage/WelcomePage";
-// import Dashboard from "./Screens/Dashboard/Dashboard"; // Uncomment and import your Dashboard component
-// import NotFound from "./Screens/NotFound/NotFound"; // Uncomment and import your NotFound component
 
 const App = () => {
   // A mock function to simulate authentication status check
