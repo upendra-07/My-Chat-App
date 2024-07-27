@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:4000/api", // Adjust to your server's URL
+  uri: process.env.REACT_APP_GRAPQL_URI, // Adjust to your server's URL
 });
 
 const authLink = setContext((_, { headers }) => {
