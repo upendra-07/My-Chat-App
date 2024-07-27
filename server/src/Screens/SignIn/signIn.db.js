@@ -16,7 +16,3 @@ const getUserByUserIdentifier = async (userIdentifier) => {
 };
 
 module.exports = { getUserByUserIdentifier };
-
-module.exports = {
-  getUserByUserIdentifier,
-};

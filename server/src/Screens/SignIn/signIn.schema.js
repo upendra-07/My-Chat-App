@@ -2,7 +2,7 @@ const { gql } = require("apollo-server-express");
 
 const singInSchema = gql`
   type User {
-    Id: Int
+    id: Int
     userName: String
     email: String
     phone: String

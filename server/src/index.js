@@ -3,6 +3,8 @@ const express = require("express");
 const { ApolloServer, AuthenticationError } = require("apollo-server-express");
 const jwt = require("jsonwebtoken");
 const signInSchema = require("./Screens/SignIn/signIn.schema");
+const signUpSchema = require("./Screens/SignUp/signUp.schema");
+const signUpResolvers = require("./Screens/SignUp/signUp.resolvers");
 const signInResolvers = require("./Screens/SignIn/signIn.resolvers");
 const db = require("./Knex/knex"); // Import the Knex instance
 
@@ -13,20 +15,10 @@ async function startServer() {
     console.log("PostgreSQL connected...");
 
     const server = new ApolloServer({
-      typeDefs: [signInSchema],
-      resolvers: [signInResolvers],
-      context: ({ req }) => {
-        const token = req.headers.authorization || "";
-        // Verify and decode JWT token (example)
-        try {
-          const decoded = jwt.verify(token, process.env.JWT_SECRET);
-          // Optionally, you can fetch user data from the database using `decoded.id`
-          return { token, db, currentUser: decoded };
-        } catch (err) {
-          // Throw AuthenticationError if token is invalid
-          throw new AuthenticationError("Invalid or expired token");
-        }
-      },
+      typeDefs: [signInSchema, signUpSchema],
+      resolvers: [signInResolvers, signUpResolvers],
+      introspection: true, // Enable introspection
+      playground: true, // Enable GraphQL Playground
     });
 
     await server.start();
