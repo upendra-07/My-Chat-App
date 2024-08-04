@@ -4,6 +4,7 @@ import {
   Route,
   Routes,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 import Login from "./Screens/Login/Login";
 import Home from "./Screens/Home/Home";
@@ -18,23 +19,22 @@ const App = () => {
     return !!localStorage.getItem("authToken");
   };
 
-  // PrivateRoute component to protect private routes
-  const PrivateRoute = ({ element: Element, ...rest }) => (
-    <Route
-      {...rest}
-      element={isAuthenticated() ? <Element /> : <Navigate to="/login" />}
-    />
-  );
+  const PrivateRoute = ({ element }) => {
+    const location = useLocation();
+    return isAuthenticated() ? (
+      element
+    ) : (
+      <Navigate to="/login" state={{ from: location }} />
+    );
+  };
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home />} />
         <Route path="/signUp" element={<SignUp />} />
-        {/* <PrivateRoute path="/dashboard" element={<Dashboard />} /> */}
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="/home" element={<PrivateRoute element={<Home />} />} />
         <Route path="*" element={<Navigate to="/" />} /> {/* Default Route */}
       </Routes>
     </Router>

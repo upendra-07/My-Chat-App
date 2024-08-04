@@ -30,7 +30,7 @@ async function startServer() {
     server.applyMiddleware({ app, path: "/api" });
 
     app.listen({ port: 4000 }, () =>
-      console.log("Server running at http://localhost:4000/api")
+      console.log("Server running at http://localhost:4000/api/v1/graphql")
     );
   } catch (err) {
     console.error("Failed to connect to the database:", err.message);

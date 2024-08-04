@@ -1,6 +1,7 @@
 const {
   userSignIn,
   getUserByUserNameOrEmail,
+  userAuthenticated,
 } = require("./signIn.controllers");
 
 const signInResolvers = {
@@ -8,6 +9,7 @@ const signInResolvers = {
     userSignIn: userSignIn,
   },
   Query: {
+    userAuthenticated: userAuthenticated,
     getUserByUserNameOrEmail: getUserByUserNameOrEmail,
   },
 };

@@ -1,17 +1,32 @@
-import { Card, Grid, Typography } from "@mui/material";
-import React, { useState } from "react";
+import {
+  Card,
+  Grid,
+  Typography,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import "./Login.css";
 import chat from "../../Assets/21794482.jpg";
 import InputField from "../../Components/InputFields/InputFields";
 import GetStartedButton from "../../Components/Buttons/GetStartedButton";
 import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { SIGN_IN_USER } from "../../graphql/mutations/User/user.mutation";
+import { useNavigate } from "react-router-dom";
+import useLogin from "./useLogin";
+
 const Login = () => {
+  const navigate = useNavigate();
+  const { userSignIn } = useLogin();
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
 
   const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,6 +34,14 @@ const Login = () => {
       ...values,
       [name]: value,
     });
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (e) => {
+    e.preventDefault();
   };
 
   const validate = () => {
@@ -29,11 +52,14 @@ const Login = () => {
     return Object.values(temp).every((x) => x === "");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
       // Handle form submission
-      console.log(values);
+      const variables = {
+        input: { email: values.email, password: values.password },
+      };
+      userSignIn({ variables });
     }
   };
 
@@ -41,14 +67,11 @@ const Login = () => {
     width: "190px",
     height: "45px",
   };
-
   return (
     <Grid container>
       <Grid item md={12} xs={12} sm={12} container>
         <Grid item md={6} xs={12} sm={12}>
-          {/* <Card sx={{ borderRadius: 0 }}> */}
           <img src={chat} alt="" className="login-side-img" />
-          {/* </Card> */}
         </Grid>
         <Grid item md={6} xs={12} sm={12} alignItems={"center"}>
           <Grid mt={12}>
@@ -75,7 +98,7 @@ const Login = () => {
               <Grid item xs={12} md={12} sm={12} mx={2}>
                 <InputField
                   name="email"
-                  label="Email"
+                  label="Email or User Name"
                   value={values.email}
                   onChange={handleInputChange}
                   error={errors.email}
@@ -86,15 +109,32 @@ const Login = () => {
                 <InputField
                   name="password"
                   label="Password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={values.password}
                   onChange={handleInputChange}
                   error={errors.password}
                   fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </Grid>
               <Grid item xs={12} align={"center"}>
-                <GetStartedButton label={"Log In"} style={btnStyle} />
+                <GetStartedButton
+                  label={"Log In"}
+                  style={btnStyle}
+                  onClick={handleSubmit}
+                />
               </Grid>
               <Grid item xs={12} align={"center"}>
                 {"Don't have an account ? "}

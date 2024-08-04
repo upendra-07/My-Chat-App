@@ -8,6 +8,7 @@ const singInSchema = gql`
     phone: String
     password: String!
     token: String
+    isAuthenticated: Boolean
   }
 
   input userSignInInput {
@@ -20,6 +21,7 @@ const singInSchema = gql`
   type Query {
     users: [User!]!
     getUserByUserNameOrEmail(userName: String, email: String): User
+    userAuthenticated(token: String): User
   }
 
   type Mutation {
