@@ -12,13 +12,10 @@ import chat from "../../Assets/21794482.jpg";
 import InputField from "../../Components/InputFields/InputFields";
 import GetStartedButton from "../../Components/Buttons/GetStartedButton";
 import { Link } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import { SIGN_IN_USER } from "../../graphql/mutations/User/user.mutation";
 import { useNavigate } from "react-router-dom";
 import useLogin from "./useLogin";
 
 const Login = () => {
-  const navigate = useNavigate();
   const { userSignIn } = useLogin();
   const [values, setValues] = useState({
     email: "",

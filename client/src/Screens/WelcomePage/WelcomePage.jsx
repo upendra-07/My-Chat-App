@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import "./WelcomePage.css";
 import GetStartedButton from "../../Components/Buttons/GetStartedButton";
@@ -12,6 +12,7 @@ const WelcomePage = () => {
   const onGetStarted = () => {
     navigate(`${ROUTES_CONST.LOGIN}`);
   };
+
   return (
     <Grid className="welcome-page-main">
       <Grid className="app-bar" container md={12} xs={12} sm={12}>
