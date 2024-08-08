@@ -10,7 +10,7 @@ import { ROUTES_CONST } from "../../Routes/RouteConstant";
 const WelcomePage = () => {
   const navigate = useNavigate();
   const onGetStarted = () => {
-    navigate(`${ROUTES_CONST.LOGIN}`);
+    navigate(`${ROUTES_CONST.HOME}`);
   };
 
   return (

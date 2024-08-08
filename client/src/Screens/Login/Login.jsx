@@ -5,17 +5,17 @@ import {
   IconButton,
   InputAdornment,
 } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import "./Login.css";
 import chat from "../../Assets/21794482.jpg";
 import InputField from "../../Components/InputFields/InputFields";
 import GetStartedButton from "../../Components/Buttons/GetStartedButton";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useLogin from "./useLogin";
-
+import { ROUTES_CONST } from "../../Routes/RouteConstant";
 const Login = () => {
+  const navigate = useNavigate();
   const { userSignIn } = useLogin();
   const [values, setValues] = useState({
     email: "",
@@ -52,11 +52,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      // Handle form submission
       const variables = {
         input: { email: values.email, password: values.password },
       };
       userSignIn({ variables });
+      navigate(`${ROUTES_CONST.HOME}`);
     }
   };
 
