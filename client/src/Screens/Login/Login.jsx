@@ -11,11 +11,9 @@ import "./Login.css";
 import chat from "../../Assets/21794482.jpg";
 import InputField from "../../Components/InputFields/InputFields";
 import GetStartedButton from "../../Components/Buttons/GetStartedButton";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useLogin from "./useLogin";
-import { ROUTES_CONST } from "../../Routes/RouteConstant";
 const Login = () => {
-  const navigate = useNavigate();
   const { userSignIn } = useLogin();
   const [values, setValues] = useState({
     email: "",
@@ -56,7 +54,6 @@ const Login = () => {
         input: { email: values.email, password: values.password },
       };
       userSignIn({ variables });
-      navigate(`${ROUTES_CONST.HOME}`);
     }
   };
 
