@@ -6,15 +6,18 @@ import { useNavigate } from "react-router-dom";
 
 const useLogin = () => {
   const navigate = useNavigate();
+  const handleTestNavigation = () => {
+    navigate(ROUTES_CONST.HOME);
+  };
+
   const [userSignIn] = useMutation(SIGN_IN_USER, {
-    onCompleted: (res) => {
+    onCompleted: async (res) => {
       // Store the token in localStorage
-      localStorage.setItem("authToken", res.userSignIn.token);
+      await localStorage.setItem("authToken", res.userSignIn.token);
 
       // Confirm the token was set before navigating
       if (localStorage.getItem("authToken")) {
         toast.success("Login successful!");
-        navigate(`${ROUTES_CONST.HOME}`);
       }
     },
     onError: (error) => {

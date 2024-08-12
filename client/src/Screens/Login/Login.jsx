@@ -11,9 +11,12 @@ import "./Login.css";
 import chat from "../../Assets/21794482.jpg";
 import InputField from "../../Components/InputFields/InputFields";
 import GetStartedButton from "../../Components/Buttons/GetStartedButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useLogin from "./useLogin";
+import { ROUTES_CONST } from "../../Routes/RouteConstant";
+
 const Login = () => {
+  const navigate = useNavigate();
   const { userSignIn } = useLogin();
   const [values, setValues] = useState({
     email: "",
@@ -49,11 +52,19 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (validate()) {
-      const variables = {
-        input: { email: values.email, password: values.password },
-      };
-      userSignIn({ variables });
+      try {
+        const variables = {
+          input: { email: values.email, password: values.password },
+        };
+
+        await userSignIn({ variables });
+        navigate(ROUTES_CONST.HOME);
+      } catch (error) {
+        // console.error("Error during sign-in:", error);
+        // Handle the error appropriately here, such as showing an error message to the user
+      }
     }
   };
 
