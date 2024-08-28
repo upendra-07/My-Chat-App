@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Grid from "@mui/material/Grid";
 import "./WelcomePage.css";
 import GetStartedButton from "../../Components/Buttons/GetStartedButton";
