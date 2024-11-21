@@ -23,6 +23,7 @@ const Login = () => {
   });
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -100,71 +101,167 @@ const Login = () => {
             AU ChatBox
           </Typography>
 
-          <Card elevation={4} sx={{ borderRadius: 4, p: 3 }}>
-            <Typography
-              variant="subtitle1"
-              align="center"
-              gutterBottom
-              className="login-title"
-            >
-              Log In
-            </Typography>
+          {isSignUp ? (
+            <Card elevation={4} sx={{ borderRadius: 4, p: 3 }}>
+              <Typography
+                variant="subtitle1"
+                align="center"
+                gutterBottom
+                className="login-title"
+              >
+                Sign Up
+              </Typography>
 
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <InputField
-                  name="email"
-                  label="Email or User Name"
-                  value={values.email}
-                  onChange={handleInputChange}
-                  error={errors.email}
-                  fullWidth
-                />
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <InputField
+                    name="email"
+                    label="Email"
+                    value={values.email}
+                    onChange={handleInputChange}
+                    error={errors.email}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <InputField
+                    name="fullName"
+                    label="Full Name"
+                    value={values.fullName}
+                    onChange={handleInputChange}
+                    error={errors.email}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <InputField
+                    name="userName"
+                    label="User Name"
+                    value={values.userName}
+                    onChange={handleInputChange}
+                    error={errors.email}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <InputField
+                    name="password"
+                    label="Password"
+                    type={showPassword ? "text" : "password"}
+                    value={values.password}
+                    onChange={handleInputChange}
+                    error={errors.password}
+                    fullWidth
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                          >
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} textAlign="center">
+                  <GetStartedButton
+                    label={"Sign Up"}
+                    style={btnStyle}
+                    onClick={handleSubmit}
+                  />
+                </Grid>
+                <Grid item xs={12} textAlign="center">
+                  <Typography variant="body2">
+                    {"Already have an account? "}
+                    <span
+                      style={{
+                        textDecoration: "none",
+                        color: "#3f51b5",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setIsSignUp((prevState) => !prevState)}
+                    >
+                      {"Log In"}
+                    </span>
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <InputField
-                  name="password"
-                  label="Password"
-                  type={showPassword ? "text" : "password"}
-                  value={values.password}
-                  onChange={handleInputChange}
-                  error={errors.password}
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                        >
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
+            </Card>
+          ) : (
+            <Card elevation={4} sx={{ borderRadius: 4, p: 3 }}>
+              <Typography
+                variant="subtitle1"
+                align="center"
+                gutterBottom
+                className="login-title"
+              >
+                Log In
+              </Typography>
+
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <InputField
+                    name="email"
+                    label="Email or User Name"
+                    value={values.email}
+                    onChange={handleInputChange}
+                    error={errors.email}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <InputField
+                    name="password"
+                    label="Password"
+                    type={showPassword ? "text" : "password"}
+                    value={values.password}
+                    onChange={handleInputChange}
+                    error={errors.password}
+                    fullWidth
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                          >
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} textAlign="center">
+                  <GetStartedButton
+                    label={"Log In"}
+                    style={btnStyle}
+                    onClick={handleSubmit}
+                  />
+                </Grid>
+                <Grid item xs={12} textAlign="center">
+                  <Typography variant="body2">
+                    {"Don't have an account? "}
+                    <span
+                      style={{
+                        textDecoration: "none",
+                        color: "#3f51b5",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setIsSignUp((prevState) => !prevState)}
+                    >
+                      {"Sign Up"}
+                    </span>
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid item xs={12} textAlign="center">
-                <GetStartedButton
-                  label={"Log In"}
-                  style={btnStyle}
-                  onClick={handleSubmit}
-                />
-              </Grid>
-              <Grid item xs={12} textAlign="center">
-                <Typography variant="body2">
-                  {"Don't have an account? "}
-                  <Link
-                    to="/signUp"
-                    style={{ textDecoration: "none", color: "#3f51b5" }}
-                  >
-                    {"Sign Up"}
-                  </Link>
-                </Typography>
-              </Grid>
-            </Grid>
-          </Card>
+            </Card>
+          )}
         </Box>
       </Grid>
     </Grid>
