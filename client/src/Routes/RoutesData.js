@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { ROUTES_CONST } from "./RouteConstant";
 
 const WelcomePage = lazy(() => import("../Screens/WelcomePage/WelcomePage")),
+  signUp = lazy(() => import("../Screens/SignUp/SignUp")),
   loginPage = lazy(() => import("../Screens/Login/Login")),
   homePage = lazy(() => import("../Screens/Home/Home"));
 

@@ -18,7 +18,6 @@
 
 .app-title {
     font-family:cursive !important;
-    font-weight: bold !important;
     font-size: 35px !important;
     color: var(--text-color) !important;
 }
